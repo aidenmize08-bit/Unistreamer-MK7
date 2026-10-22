@@ -67,13 +67,10 @@ class MainActivity : Activity() {
     private var ua = ""
     private var busy = false
 
-    private fun toast(message: String) {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        } else {
-            runOnUiThread { Toast.makeText(this, message, Toast.LENGTH_SHORT).show() }
-        }
-    }
+    private fun toast(msg: String) {
+    val show = { Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show() }
+    if (Looper.myLooper() == Looper.getMainLooper()) show() else runOnUiThread(show)
+}
 
     private val blocked = listOf(
         "doubleclick.net", "googlesyndication.com", "googleadservices.com",
